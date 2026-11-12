@@ -39,8 +39,21 @@ ggplot(text_long, aes(x=Time, y=Messages, fill=Time)) +
 ## Summary Statistics
 ################################################################################
 
+install.packages("pastecs")
 
+library(pastecs)
 
+text_data <- read.csv("TextMessages.csv", header=TRUE)
+
+head(text_data)
+
+text_data$Group <- as.factor(text_data$Group)
+
+by(text_data$Baseline, text_data$Group, 
+   function(X)round(stat.desc(X),2))
+
+by(text_data$Six_months, text_data$Group, 
+   function(X)round(stat.desc(X),2))
 
 
 ################################################################################
