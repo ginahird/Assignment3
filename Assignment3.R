@@ -13,14 +13,14 @@ text_data <- read.csv("TextMessages.csv", header=TRUE)
 
 head(text_data)
 
-text_long <- melt(Message_data, id.vars = c("Group","Participant"),
+text_long <- melt(text_data, id.vars = c("Group","Participant"),
                           variable.name ="Time",
                           value.name = "Messages")
 range(text_long$Messages)
 
 text_long$Group <- as.factor(text_long$Group)
 
-is.factor(long_Message_data$Time)
+is.factor(text_long$Time)
 
 BarWithErrors_MessageTimeByGroup <- ggplot(text_long, 
                                            aes(Group,
