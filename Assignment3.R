@@ -27,10 +27,10 @@ head(text_data)
 
 text_data$Group <- as.factor(text_data$Group)
 
-by(Message_data$Baseline, Message_data$Group, 
+by(text_data$Baseline, text_data$Group, 
    function(X)round(stat.desc(X),2))
 
-by(Message_data$Six_months, Message_data$Group, 
+by(text_data$Six_months, text_data$Group, 
    function(X)round(stat.desc(X),2))
 
 
