@@ -1,11 +1,21 @@
 ################################################################################
-## Visualization 1
+## Setup
 ################################################################################
+#install.packages("ggplot2")
+#install.packages("tidyr")
+#install.packages("pastecs")
+#install.packages("reshape2")
 library(ggplot2)
 library(tidyr)
+library(pastecs)
+library(reshape2)
 
-#setting dataset
-text_data <- read.csv("TextMessages.csv")
+#setting data set
+text_data <- read.csv("TextMessages.csv", header = TRUE)
+
+################################################################################
+## Visualization 1
+################################################################################
 
 #factoring Group column so that is has appropriate levels for faceting
 text_data$Group <- factor(text_data$Group, levels=c(1,2),
@@ -31,20 +41,20 @@ ggplot(text_long, aes(x=Time, y=Messages, fill=Time)) +
 ## Visualization 2
 ################################################################################
 
-text_data <- read.csv("TextMessages.csv", header=TRUE)
-
 head(text_data)
 
-text_long <- melt(text_data, id.vars = c("Group","Participant"),
-                          variable.name ="Time",
-                          value.name = "Messages")
-range(text_long$Messages)
+text_long_melt <- melt(text_data, id.vars = c("Group","Participant"),
+                       variable.name ="Time",
+                       value.name = "Messages")
 
-text_long$Group <- as.factor(text_long$Group)
+range(text_long_melt$Messages)
 
-is.factor(text_long$Time)
+text_long_melt$Group <- factor(text_data$Group, levels=c(1,2),
+                               labels=c("Group 1", "Group 2"))
 
-BarWithErrors_MessageTimeByGroup <- ggplot(text_long, 
+is.factor(text_long_melt$Time)
+
+BarWithErrors_MessageTimeByGroup <- ggplot(text_long_melt, 
                                            aes(Group,
                                                Messages))
 
@@ -61,15 +71,8 @@ BarWithErrors_MessageTimeByGroup +
 ## Summary Statistics
 ################################################################################
 
-install.packages("pastecs")
-
-library(pastecs)
-
-text_data <- read.csv("TextMessages.csv", header=TRUE)
 
 head(text_data)
-
-text_data$Group <- as.factor(text_data$Group)
 
 by(text_data$Baseline, text_data$Group, 
    function(X)round(stat.desc(X),2))
