@@ -97,14 +97,14 @@ multiple rows per participant but one row per finding.
    9. Gina and Josue both pulled the updates from main and continued to make 
       updates in the respective branches, like adding comments on outputs, 
       renaming data sets to consolidate, and aligning outputs. Josue reworked 
-      the bar plot to instead facet by Group to match the box plot faceting and
-      pushed the changes. Gina also added N and n counts and pushed changes. 
-      Josue was able to pull these changes and apply the same technique to his
-      plot.
-  10. Gina updated the README with project information, instructions to run
+      the bar plot within a new branch, "UpdatedVisualization2", to instead
+      facet by Group to match the box plot faceting and pushed the changes.
+      Gina also added N and n counts and pushed changes. Josue was able to pull
+      these changes and apply the same technique to his plot.
+  11. Gina updated the README with project information, instructions to run
       and details of contributions and committed/pushed it from the Documentation 
       branch.
-  11. After both partners were done making changes, Gina placed the code from 
+  12. After both partners were done making changes, Gina placed the code from 
       the .R file into a .Rmd and knit to a PDF. She then pushed both final
       files up to the repository.
 
