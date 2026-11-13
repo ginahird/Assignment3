@@ -5,10 +5,12 @@
 #install.packages("tidyr")
 #install.packages("pastecs")
 #install.packages("reshape2")
+#install.packages("Hmisc")
 library(ggplot2)
 library(tidyr)
 library(pastecs)
 library(reshape2)
+library(Hmisc)
 
 #setting data set
 text_data <- read.csv("TextMessages.csv", header = TRUE)
