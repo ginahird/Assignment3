@@ -181,5 +181,6 @@ by(text_data$Six_months, text_data$Group,
 ################################################################################
 ## Documentation
 ################################################################################
-
+##See README.md included in git repository for full documentation information
+##Git repository can be found at: https://github.com/ginahird/Assignment3.git
 
