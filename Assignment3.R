@@ -26,6 +26,9 @@ text_data$Group <- factor(text_data$Group, levels=c(1,2),
 text_long <- pivot_longer(text_data, cols=c(Baseline, Six_months),
                           names_to="Time", values_to="Messages")
 
+#checking the range of Messages to set the y-axis limits
+range(text_long$Messages)
+
 #factoring time since this we also be needed in the boxplot
 text_long$Time <- factor(text_long$Time, levels=c("Baseline", "Six_months"),
                          labels=c("Baseline", "Six Months"))
@@ -39,7 +42,8 @@ ggplot(text_long, aes(x=Time, y=Messages, fill=Time)) +
        x="Time", y="Number of Text Messages",
        caption = paste0("Footnotes: \nN = total number of participants across ",
        "all groups. \nn = number of participants within a group.")) +
-  theme(plot.caption = element_text(hjust=0),legend.position = "none")
+  theme(plot.caption = element_text(hjust=0),legend.position = "none") +
+  scale_y_continuous(limits = c(0,90), breaks = seq(from = 0, to = 90, by = 10))
 
 ##Comments
 ##Both groups had a similar distribution at baseline, both with medians of 
@@ -63,14 +67,23 @@ text_long_melt <- melt(text_data, id.vars = c("Group","Participant"),
                        variable.name ="Time",
                        value.name = "Messages")
 
+##Transforming text_data to long a second time here is a little bit redundant, 
+##but we elected to keep this code because each partner approached the 
+##transformation differently. We wanted to leave both methods in the final output
+##to show how people can approach certain problems differently.
+
 #assessing the range of the Messages variable for use in visualization.
 range(text_long_melt$Messages)
 
 #checking whether the Group categorical variable is a factor.
 is.factor(text_long_melt$Group)
 
-#checking whether the Time categorical varialbe is a factor.
+#checking whether the Time categorical variable is a factor.
 is.factor(text_long_melt$Time)
+
+#factoring Time again to match the text_long data labels from above
+text_long_melt$Time <- factor(text_long_melt$Time, levels=c("Baseline", "Six_months"),
+                         labels=c("Baseline", "Six Months"))
 
 #Creating the base plot for the bar graph of Time and Number of Messages.
 BarWithErrors_MessageTimeByGroup <- ggplot(text_long_melt, 
@@ -79,7 +92,7 @@ BarWithErrors_MessageTimeByGroup <- ggplot(text_long_melt,
 
 #Creating the bar graph of Time and Number of Messages.
 BarWithErrors_MessageTimeByGroup +
-  stat_summary(fun = mean, geom="bar",fill="White", colour="black") +
+  stat_summary(aes(fill=Time),fun = mean, geom="bar", colour="black") +
   stat_summary(fun.data=mean_cl_normal, geom="pointrange", colour= "Red") +
   labs(x="Time", y="Number of Text Messages", 
        title= paste0("Number of Text Messages by Group and Time, N = ", 
@@ -87,7 +100,7 @@ BarWithErrors_MessageTimeByGroup +
        caption = paste0("Footnotes: \nN = total number of participants across ",
                   "all groups. \nn = number of participants within a group."))+ 
   facet_wrap(.~Group) +
-  scale_y_continuous(limits= c(0,90), breaks=seq(from=0, to=90, by=5)) +
+  scale_y_continuous(limits= c(0,90), breaks=seq(from=0, to=90, by=10)) +
   theme(plot.caption = element_text(hjust=0),legend.position = "none")
 
 #The bar chart shows that the mean number of text messages was similar at 
