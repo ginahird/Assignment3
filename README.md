@@ -32,6 +32,7 @@ descriptive statistics, and comment on any trends we noticed.
 **Gina Hird:**
       GitHub Repository Setup; Visualization #1 (Faceted Boxplot); README 
       Documentation; Providing Feedback to Partner
+      
 **Josue Hernandez:**
       Visualization #2 (Faceted Bar Chart); Summary Statistics; Providing
       Feedback to Partner
